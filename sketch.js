@@ -2,6 +2,7 @@ let player;
 let block;
 let collCheck = false;
 let pCoords;
+let bullets = [];
 
 let video;
 let flippedVideo;
@@ -41,10 +42,15 @@ function draw() {
 
   pCoords = player.getCoords();
   player.move();
+  player.shoot();
   block.show();
   collCheck = player.hits(block);
   if (collCheck === true) {
     console.log("collisionDetected");
     player.setCoords(pCoords[0], pCoords[1]);
   }
+  
+  bullets.forEach(bullet => {
+    bullet.show();
+  })
 }

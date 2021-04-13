@@ -47,9 +47,11 @@ class Player {
   }
 
   shoot() {
-    // if (keyIsDown(LEFT_ARROW)) {
-      //   this.x -= 5;
-      // }
+    if (keyIsDown(LEFT_ARROW)) {
+        console.log("pewpew");
+        let bullet = new Bullet(this.x+(this.r/2-5), this.y);
+        bullets.push(bullet);
+      }
   }
 
 

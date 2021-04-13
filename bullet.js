@@ -7,8 +7,8 @@ class Bullet {
     }
 
     show() {
-        rect(this.x, this.y, 10, 40);
-        this.y+=this.velY;
+        rect(this.x, this.y, 5, 20);
+        this.y-=this.velY;
     }
-    
+
 }
