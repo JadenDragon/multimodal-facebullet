@@ -50,7 +50,21 @@ function draw() {
     player.setCoords(pCoords[0], pCoords[1]);
   }
   
-  bullets.forEach(bullet => {
+  for (let index = 0; index < bullets.length; index++) {
+    let bullet = bullets[index];
+    let bulletCheck;
+    bulletCheck = bullet.hits(block);
     bullet.show();
-  })
+    if (bulletCheck === true) {
+      //remove(bullets, index);
+      bullet.visible = false;
+      console.log("DED!");
+    }  
+  }
+
+}
+
+
+function remove(array, index) {
+  array.splice(index, 1);
 }
