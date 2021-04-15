@@ -1,11 +1,18 @@
 class Block {
     constructor() {
         this.r = 39
-          this.x = 10;
-          this.y = 20;
+        this.x = random(40, width);
+        this.y = 20;
+        this.velY = 3;
     }
 
-    show() {
-        rect(this.x, this.y, 40, 40);
+    show(x) {
+        x = this.x;
+        fill(230, 180, 0);
+        rect(this.x, this.y, 80, 30);
+    }
+
+    fall() {
+        this.y = this.y + this.velY;
     }
 }

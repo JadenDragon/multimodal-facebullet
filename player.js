@@ -7,7 +7,7 @@ class Player {
       this.r = 50;
       this.x = width/2 - 30;
       this.y = height - 50;
-      this.velY = 2;
+      this.velY = 2.2;
 
     }
 

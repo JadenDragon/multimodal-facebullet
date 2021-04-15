@@ -3,6 +3,7 @@ let block;
 let collCheck = false;
 let pCoords;
 let bullets = [];
+let blocks = [];
 
 let video;
 let flippedVideo;
@@ -21,8 +22,8 @@ function setup() {
   player = new Player();
   block = new Block();
   pCoords = player.getCoords();
-  console.log(pCoords);
-  console.log(flippedVideo);
+  //console.log(pCoords);
+  //console.log(flippedVideo);
 }
 
 function gotPoses(poses) {
@@ -39,27 +40,53 @@ function modelLoaded() {
 function draw() {
   background(220);
   player.show();
-
+  // block.show();
+  // block.fall();
   pCoords = player.getCoords();
   player.move();
   player.shoot();
-  block.show();
-  collCheck = player.hits(block);
-  if (collCheck === true) {
-    console.log("collisionDetected");
-    player.setCoords(pCoords[0], pCoords[1]);
-  }
+  
   
   for (let index = 0; index < bullets.length; index++) {
     let bullet = bullets[index];
     let bulletCheck;
-    bulletCheck = bullet.hits(block);
     bullet.show();
+    bulletCheck = bullet.hits(block);
     if (bulletCheck === true) {
       //remove(bullets, index);
       bullet.visible = false;
-      console.log("DED!");
+      console.log("DED bullet!");
     }  
+  }
+
+  // for (let index = 0; index < blocks.length; index++) {
+  //   let block = blocks[index];
+  //   let blockCheck;
+  //   console.log(blocks[index]);
+  //   //bulletCheck = bullet.hits(block);
+  //   block.show();
+  //   block.fall();
+  //   // if (blockCheck === true) {
+  //   //   //remove(bullets, index);
+  //   //   bullet.visible = false;
+  //   //   console.log("DED!");
+  //   // }  
+  // }
+
+  
+  if (random(1) < 0.004) {
+    blocks.push(new Block());
+  }
+
+  for (let block of blocks){
+    block.show();
+    block.fall();
+    collCheck = player.hits(block);
+    if (collCheck === true) {
+      console.log("PlayerCollisionDetected");
+      player.setCoords(pCoords[0], pCoords[1]);
+      //noLoop();
+    }
   }
 
 }
@@ -67,4 +94,9 @@ function draw() {
 
 function remove(array, index) {
   array.splice(index, 1);
+}
+
+
+function onLoad() {
+  
 }

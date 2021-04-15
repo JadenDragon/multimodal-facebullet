@@ -9,6 +9,7 @@ class Bullet {
 
     show() {
         if (this.visible == true) {
+            fill(0, 180, 230);
             rect(this.x, this.y, 5, 20);        
         }
         this.y-=this.velY;
