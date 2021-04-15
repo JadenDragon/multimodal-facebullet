@@ -8,9 +8,11 @@ class Bullet {
     }
 
     show() {
-        if (this.visible == true) {
+        if (this.visible === true) {
             fill(0, 180, 230);
             rect(this.x, this.y, 5, 20);        
+        } else if (this.visible === false) {
+            rect(-10, -10, 0, 0);
         }
         this.y-=this.velY;
     }

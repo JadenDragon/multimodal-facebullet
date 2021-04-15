@@ -32,7 +32,7 @@ class Player {
     }
 
     hits(block) {
-      return collideRectRect(this.x, this.y, this.r, this.r, block.x, block.y, block.r, block.r);
+      return collideRectRect(this.x, this.y, this.r, this.r, block.x+10, block.y-10, block.r, block.r);
     }
 
     move(user) {
@@ -47,11 +47,15 @@ class Player {
   }
 
   shoot() {
-    if (keyIsDown(LEFT_ARROW)) {
-        console.log("pewpew");
-        let bullet = new Bullet(this.x+(this.r/2-5), this.y);
-        bullets.push(bullet);
-      }
+    // if (keyIsDown(LEFT_ARROW)) {
+    //     console.log("pewpew");
+    //     let bullet = new Bullet(this.x+(this.r/2-5), this.y);
+    //     bullets.push(bullet);
+    //   }
+
+    console.log("pewpew");
+    let bullet = new Bullet(this.x+(this.r/2-5), this.y);
+    bullets.push(bullet);
   }
 
 
