@@ -1,9 +1,11 @@
 class Block {
     constructor() {
         this.r = 39
-        this.x = random(40, width);
+        this.x = random(20, width - 20);
         this.y = 20;
-        this.velY = 2;
+        //this.lengte;
+        //this.breedte;
+        this.velY = 3;
         this.visible = true;
     }
 
@@ -12,6 +14,7 @@ class Block {
             x = this.x;
             fill(230, 180, 0);
             rect(this.x, this.y, 80, 30);
+            //rect(50, 80, this.lengte, this.breedte);
         } else if (this.visible === false) {
             rect(0, 0, 0, 0);
         }

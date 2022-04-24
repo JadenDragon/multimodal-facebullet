@@ -6,13 +6,14 @@ let bullets = [];
 let blocks = [];
 let counter = 0;
 let gameOver = false;
-let startSong;
+let fallSpeed = 0.007;
 
 let video;
 let flippedVideo;
 
-let audio = new Audio("sound/thunder.mp3");
-let explosion = new Audio("sound/zapsplat_explosions_short_small_explosion_no_tail_003_62730.mp3");
+// let startAudio = new Audio("sound/science_fiction_machine_object_obliterate.mp3 ");
+// let audio = new Audio("sound/thunder.mp3");
+// let explosion = new Audio("sound/zapsplat_explosions_short_small_explosion_no_tail_003_62730.mp3");
 
 // Global variable to store the classifier
 let classifier;
@@ -21,13 +22,13 @@ let classifier;
 let label = 'listening...';
 
 // Teachable Machine model URL:
-let soundModel = 'https://teachablemachine.withgoogle.com/models/2CCC-uNZj/';
+let soundModel = 'https://teachablemachine.withgoogle.com/models/KlSpA6qhd/';
 
 
 function preload() {
     // Load the model
     classifier = ml5.soundClassifier(soundModel + 'model.json');
-    startSong = loadSound("sound/science_fiction_machine_object_obliterate.mp3");
+
 }
 
 // function loaded() {
@@ -39,9 +40,9 @@ function setup() {
     video = createCapture(VIDEO);
     video.hide();
     //flippedVideo = ml5.flipImage(video);
-    startSong.play();
-    audio.volume = 0.12;
+    //startAudio.play();
     //audio.play();
+    //audio.volume = 0.12;
 
     poseNet = ml5.poseNet(video, {
         //flipHorizontal:true
@@ -83,15 +84,16 @@ function draw() {
     for (let index = 0; index < bullets.length; index++) {
         let bullet = bullets[index];
         bullet.show();
-        if (bullet.hits(block)) {
+        if (bullet.onHit(block)) {
             //remove(bullets, index);
-            bullet.visible = false;
-            explosion.play();
+            //bullet.visible = false;
+            bullet.change();
+            //explosion.play();
             console.log("DED bullet!");
         }
     }
 
-    if (random(1) < 0.005) {
+    if (random(1) < fallSpeed) {
         blocks.push(new Block());
     }
 
@@ -107,7 +109,6 @@ function draw() {
             gameOver === true;
             //checkGame();
         }
-
     })
 
     // Draw the label in the canvas
@@ -128,13 +129,14 @@ function gotResult(error, results) {
     // console.log(results[0]);
     label = results[0].label;
 
-    if (label === 'Shoot') {
+    if (label === 'Clap') {
         player.shoot();
-    } else if (label === 'Clap') {
-        // window.location.reload();
-        console.log("RESTART!");
-        checkGame();
-    }
+    } 
+    // else if (label === 'Start') { //say GO to reset
+    //     window.location.reload();
+    //     console.log("RESTART!");
+    //     checkGame();
+    // }
 }
 
 
@@ -143,12 +145,12 @@ function remove(array, index) {
 }
 
 //restarts game on CLAP
-function checkGame() {
-    if (gameOver == true) {
-        window.location.reload();
-        console.log("YOU DIED!");
-    }
-}
+// function checkGame() {
+//     if (gameOver == true) {
+//         window.location.reload();
+//         console.log("YOU DIED!");
+//     }
+// }
 
 // function onLoad() {
 

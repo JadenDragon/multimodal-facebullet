@@ -6,7 +6,7 @@ class Bullet {
         this.r = 5;
         this.x = x;
         this.y = y;
-        this.velY = 2;
+        this.velY = 8;
         this.visible = true;
     }
 
@@ -20,11 +20,22 @@ class Bullet {
         this.y -= this.velY;
     }
 
-    hits(block) {
+    change() {
+        if (this.visible === true) {
+            fill(250, 50, 30);
+            rect(this.x, this.y, 5, 20);
+        } else if (this.visible === false) {
+            rect(-10, -10, 0, 0);
+        }
+        this.y -= this.velY;
+    }
+
+    onHit(block) {
         //console.log(block);
         //explosion.play();
         //explosion.volume = 0.1;
-        return collideRectRect(this.x, this.y, this.r, this.r, block.x, block.y, block.r, block.r);
+        //console.log("hit");
+        return collideRectRect(this.x, this.y, this.r, this.r, block.x, block.y, 80, 30);
     }
 
     // feedback(){
